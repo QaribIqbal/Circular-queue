@@ -45,8 +45,10 @@ public:
 		if (count != 0) {
 			itr = front;
 			do {
-
+				if (arr[itr] != -1)
+				{	
 				cout << arr[itr] << " ";
+				}
 				itr = (itr + 1) % size;
 			} while (itr != rear);
 			return 1;
@@ -55,7 +57,49 @@ public:
 			cout << "\nQueue is empty!\n";
 		}
 	}
-
+	bool remove(int val)
+	{
+		int itr = 0;
+		if (count != 0) {
+			itr = front;
+			do {
+				if (arr[itr] == -1)
+				{
+					continue;
+				}
+				if (arr[itr] == val)
+				{
+					cout << " \nValue removed : " << arr[itr] << endl;
+					arr[itr] = -1;
+					count--;
+					break;
+				}
+				itr = (itr + 1) % size;
+			} while (itr != rear);
+			return 1;
+		}
+		else {
+			cout << "\nQueue is empty!\n";
+		}
+	}
+	int getCount()
+	{
+		return count;
+	}
+	int getSize()
+	{
+		return size;
+	}
+	bool isFull() 
+	{
+		if (count == size)
+		{
+			return 1;
+		}
+		else {
+			return 0;
+		}
+	}
 };
 int main()
 {
@@ -72,5 +116,16 @@ int main()
 	cout << "\nValue dequeued : " << val << " \n";
 
 	arr.display();
+	arr.remove(4);
+	arr.display();
+	cout << "\nTotal elements in the queue : " << arr.getCount() << endl;
+	cout << "\nSize of the queue : " << arr.getSize() << endl;
+	if (arr.isFull())
+	{
+		cout << "\nQueue is full!\n";
+	}
+	else {
+		cout << "\nQueue is not full!\n";
+	}
 	return 0;
 }
